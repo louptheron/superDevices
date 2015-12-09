@@ -46,9 +46,9 @@ var devices = {
             if (errR) {
                 done(errR);
             } else {
-                GroupDB.findByIdAndUpdate({_id:doc.groups},{$pull: {devices: deviceID}}, function(err) {
+                /*GroupDB.findByIdAndUpdate({_id:doc.groups},{$pull: {devices: deviceID}}, function(err) {
                     done(err);
-                });
+                });*/
                 UserDB.findByIdAndUpdate({_id: userID}  ,{$pull: {devices: deviceID }}, function(err) {
                     done(err);
                 });

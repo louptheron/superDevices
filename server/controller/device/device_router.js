@@ -14,20 +14,28 @@ module.exports = function(passport) {
         if (splitedPost[1] == "true") {
             db.desactivateDevice(splitedPost[0], function (err) {
                 if(err){
+                    res.send({msg: "ko"});
                     console.log(err);
+                }
+                else {
+                    res.send({msg: "ok"});
                 }
             });
         }
         else if (splitedPost[1] == "false") {
             db.activateDevice(splitedPost[0], function (err) {
                 if(err){
+                    res.send({msg: "ko"});
                     console.log(err);
+                }
+                else {
+                    res.send({msg: "ok"});
                 }
             });
         }
         else {
             console.log("error in server in post /changeDeviceState");
-            res.send({msg: "ok"});
+            res.send({msg: "ko"});
         }
     });
 
@@ -35,9 +43,10 @@ module.exports = function(passport) {
         db.removeDevice (req.body.id, req.user._id, function (err) {
             if(err){
                 console.log(err);
+                res.send({msg : "ko"});
             }
-          //  res.send({msg : "ok"});
-        })
+        });
+        res.send({msg : "ok"});
     });
 
 
