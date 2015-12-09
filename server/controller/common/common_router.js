@@ -1,0 +1,58 @@
+/**
+ * Created by rouxbot on 19/11/15.
+ */
+'use strict';
+
+var express = require('express');
+var router = express.Router();
+var db = require('../../model/db_interface.js');
+
+module.exports = function(passport) {
+    router.get('/', function(req, res) {
+        res.render('pages/content', {
+            title: 'Home'
+        });
+    });
+
+    router.get('/content', function(req, res) {
+        res.redirect('/');
+    });
+
+    router.get('/register', function(req, res) {
+        res.render('pages/register', {
+            title: 'Register'
+        });
+    });
+
+    router.get('/connectDevice', passport.ensureAuthenticated,function(req, res) {
+            res.render('pages/connectDevice', {
+                title: "createDevice",
+                user: (req.user) ? {pseudo: req.user.pseudo} : null
+            });
+        });
+
+    router.get('/manageDevices', passport.ensureAuthenticated,function(req, res) {
+        db.getDevices(req.user._id , function(err,docs) {
+            res.render('pages/manageDevices', {
+                title: "Devices",
+                devices: docs.devices,
+                user: (req.user) ? {pseudo: req.user.pseudo} : null
+            });
+        });
+    });
+
+    router.get('/login', function (req, res) {
+        res.render('pages/login', {
+            title: 'login'
+        });
+    });
+
+    router.get('/logout', function (req, res) {
+        if (req.isAuthenticated()) {
+            req.logout();
+        }
+        res.redirect('/');
+    });
+
+    return router;
+};

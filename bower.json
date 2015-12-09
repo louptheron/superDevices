@@ -1,0 +1,19 @@
+{
+  "name": "webservice_project",
+  "description": "Webservices for IoT, in NodeJS",
+  "main": "server/server_webservice.js",
+  "authors": [
+    "clemRoux <roux.clement05@gmail.com>"
+  ],
+  "license": "ISC",
+  "moduleType": [],
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
