@@ -35,7 +35,6 @@ var groupSchema = Schema({
     state: Boolean
 });
 
-
 module.exports = {
     disconnect: function() {
         mongoose.disconnect();

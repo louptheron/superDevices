@@ -9,14 +9,40 @@ var db = require('../../model/db_interface.js');
 
 module.exports = function(passport) {
 
-    router.get('/:id', passport.ensureAuthenticated, function(req, res) {
-        db.getDevice(req.params._id,function(err, docs) {
-            if(err)
-                res.send({msg: 'probleme'});
-            else
-                console.log(docs);
+    router.post('/changeState', passport.ensureAuthenticated, function(req, res) {
+        var splitedPost = req.body.id.split("+");
+        if (splitedPost[1] == "true") {
+            db.desactivateDevice(splitedPost[0], function (err) {
+                if(err){
+                    console.log(err);
+                }
             });
-        });
+        }
+        else if (splitedPost[1] == "false") {
+            db.activateDevice(splitedPost[0], function (err) {
+                if(err){
+                    console.log(err);
+                }
+            });
+        }
+        else {
+            console.log("error in server in post /changeDeviceState");
+            res.send({msg: "ok"});
+        }
+    });
 
-    return router;
+    router.post('/delete', passport.ensureAuthenticated, function(req, res) {
+        db.removeDevice (req.body.id, req.user._id, function (err) {
+            if(err){
+                console.log(err);
+            }
+          //  res.send({msg : "ok"});
+        })
+    });
+
+
+
+
+
+        return router;
 };

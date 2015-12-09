@@ -31,12 +31,12 @@ var devices = {
     },
 
     activateDevice: function(id, done) {
-        GroupDB.findByIdAndUpdate({_id: id}, {state: true}, function(err) {
+        DeviceDB.findByIdAndUpdate({_id: id}, {state: true}, function(err) {
             done(err);
         });
     },
     desactivateDevice: function(id, done) {
-        GroupDB.findByIdAndUpdate(id, {state: false}, function(err) {
+        DeviceDB.findByIdAndUpdate(id, {state: false}, function(err) {
             done(err);
         });
     },
@@ -46,10 +46,10 @@ var devices = {
             if (errR) {
                 done(errR);
             } else {
-                GroupDB.findByIdAndUpdate({_id:doc.groups},{$pull: {devices: doc._id}}, function(err) {
+                GroupDB.findByIdAndUpdate({_id:doc.groups},{$pull: {devices: deviceID}}, function(err) {
                     done(err);
                 });
-                UserDB.findByIdAndUpdate({_id: userID}  ,{$pull: {devices: doc._id }}, function(err) {
+                UserDB.findByIdAndUpdate({_id: userID}  ,{$pull: {devices: deviceID }}, function(err) {
                     done(err);
                 });
             }

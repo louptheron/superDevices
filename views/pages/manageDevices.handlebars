@@ -34,14 +34,10 @@
                         <td>{{device.deviceName}}</td>
                         <td>{{device.deviceUID}}</td>
                         <td>
-                                {{#if device.state}}
-                                    <input type="checkbox" checked data-size="mini" class="state" value="{{device._id}}" >
-                                {{else}}
-                                    <input type="checkbox" data-size="mini" class="state" value="{{device._id}}">
-                                {{/if}}
+                                <input type="checkbox" {{#if device.state}} name="{{device._id}}}" checked {{/if}} data-size="mini" class="state" value="{{device._id}}+{{device.state}}" >
                         </td>
                         <td>
-                            <button type="button" class="btn btn-danger btn-xs">
+                            <button type="button" class="btn btn-danger btn-xs delete" value="{{device._id}}">
                                 <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> delete
                             </button>
                         </td>
