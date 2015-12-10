@@ -15,7 +15,6 @@ $( "#connectDevice" ).submit(function( event ) {
         },
         success: function(data) {
             $(".close").alert();
-            console.log(data);
             if(data.msg.toString() == "ok"){
                 $("#alert").text("Device connected !");
                 $(".alert").show();
