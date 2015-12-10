@@ -24,14 +24,14 @@ module.exports = function(passport) {
         });
     });
 
-    router.get('/connectDevice', passport.ensureAuthenticated,function(req, res) {
+    router.get('/connectDevice', passport.ensureAuthenticated, function(req, res) {
             res.render('pages/connectDevice', {
                 title: "createDevice",
                 user: (req.user) ? {pseudo: req.user.pseudo} : null
             });
         });
 
-    router.get('/manageDevices', passport.ensureAuthenticated,function(req, res) {
+    router.get('/manageDevices', passport.ensureAuthenticated, function(req, res) {
         db.getDevices(req.user._id , function(err,docs) {
             res.render('pages/manageDevices', {
                 title: "Devices",

@@ -4,6 +4,30 @@
 'use strict';
 /* globals tools, toastr */
 
+$(".alert").hide();
+
+$( "#connectDevice" ).submit(function( event ) {
+    $.ajax({
+        url: '/device/connect',
+        type: 'post',
+        data: {
+            deviceName : $('input[name=deviceName]').val(), deviceUID : $('input[name=deviceUID]').val()
+        },
+        success: function(data) {
+            $(".close").alert();
+            console.log(data);
+            if(data.msg.toString() == "ok"){
+                $("#alert").text("Device connected !");
+                $(".alert").show();
+            }
+            else {
+                $("#alert").text(data.msg.toString());
+                $(".alert").show();
+            }
+        }
+    });
+    event.preventDefault();
+});
 
 $( ".state" ).each(function(index) {
     $(this)

@@ -35,21 +35,6 @@ module.exports = function(passport) {
         });
     });
 
-    router.post('/connectDevice', passport.ensureAuthenticated, function(req, res) {
-        db.addDevice(req.body.deviceName, req.body.deviceUID,req.user._id,function(err) {
-            if (err) {
-                if (err.toString().indexOf('deviceName') >= 0) {
-                    res.send({msg: 'device name needed'});
-                } else if (err.toString().indexOf('deviceUID') >= 0) {
-                    res.send({msg: 'UID needed'});
-                } else {
-                    res.send(err);
-                }
-            } else {
-                res.send({msg: 'ok'});
-            }
-        });
-    });
 
     return router;
 };

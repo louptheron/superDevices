@@ -40,7 +40,7 @@ module.exports = function(grunt) {
                 jshintrc: true
             },
             client: {
-                src: ['resources/scripts/*.js']
+                src: ['resources/dist/js/*.js']
             },
             server: {
                 src: ['server/*.js', 'server/*/*.js' , 'server/*/*/*.js']

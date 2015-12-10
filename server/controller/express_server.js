@@ -14,8 +14,8 @@ var MongoStore = require('connect-mongo')(session);
 require('./passport_config.js')(passport);
 var client = require('./common/common_router.js')(passport);
 var clientServices = require('./common/common_service.js')(passport);
-var device = require('./device/device_router.js')(passport);
-//var deviceServices = require('./device/device_service.js')(passport);
+//var device = require('./device/device_router.js')(passport);
+var deviceServices = require('./device/device_service.js')(passport);
 
 var hbs = exphbs.create({
     defaultLayout: 'client',
@@ -48,7 +48,7 @@ app.use(express.static('resources'));
 
 app.use('/', client);
 app.use('/', clientServices);
-app.use('/device', device);
-//app.use('/device', deviceServices);
+//app.use('/device', device);
+app.use('/device', deviceServices);
 
 module.exports = app;
