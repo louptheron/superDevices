@@ -13,15 +13,44 @@ $( "#register" ).submit(function( event ) {
             password : $('input[name=password]').val()
         },
         success: function(data) {
-            $(".close").alert();
             if(data.msg.toString() == "ok"){
                 $("#alert").html("User created, <a href='/login'>log in</a> now!");
-                $(".alert").show();
             }
             else {
                 $("#alert").text(data.msg.toString());
-                $(".alert").show();
             }
+            $(".alert").show();
+        }
+    });
+    event.preventDefault();
+});
+
+$( "#login" ).submit(function( event ) {
+    $.ajax({
+        url: '/login',
+        type: 'post',
+        data: {
+            email : $('input[name=email]').val(),
+            password : $('input[name=password]').val()
+        },
+        success: function(data) {
+                location.reload();
+        },
+        error: function(data) {
+                $("#alert").text("Wrong email/password...");
+                $(".alert").show();
+        }
+    });
+    event.preventDefault();
+});
+
+$( "#logout" ).click(function( event ) {
+    $.ajax({
+        url: '/logout',
+        type: 'post',
+        data: {},
+        success: function(data) {
+            location.reload();
         }
     });
     event.preventDefault();

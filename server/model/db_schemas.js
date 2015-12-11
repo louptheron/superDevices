@@ -25,7 +25,7 @@ var userSchema = Schema({
 var deviceSchema = Schema({
     deviceName: {type: String, required: true},
     deviceUID: {type: Number, required: true, unique: true},
-    state: {type:Boolean,default:true},
+    state: {type:Boolean, default:true},
     groups: [{type: Schema.Types.ObjectId, ref: 'Groups'}]
 });
 

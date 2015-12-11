@@ -9,10 +9,7 @@ var db = require('../../model/db_interface.js');
 
 module.exports = function(passport) {
     router.post('/login', passport.authenticate('local'), function (req, res) {
-        res.render('pages/content', {
-            title: "Welcome",
-            user: (req.user) ? {pseudo: req.user.pseudo} : null
-        });
+        res.send({msg: 'ok'});
     });
 
     router.post('/register', function(req, res) {
@@ -35,6 +32,10 @@ module.exports = function(passport) {
         });
     });
 
+    router.post('/logout', function (req, res) {
+        req.logout();
+        res.redirect('/');
+    });
 
     return router;
 };

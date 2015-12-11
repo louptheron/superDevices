@@ -2,7 +2,7 @@
 <div class="content-wrapper">
     <div class="register-box-body">
         <p class="login-box-msg">Login</p>
-        <form action="login" method="post">
+        <form id="login">
             <div class="form-group has-feedback">
                 <input type="email" class="form-control" name="email"placeholder="Email">
                 <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
@@ -17,7 +17,11 @@
                 </div><!-- /.col -->
             </div>
         </form>
-
+        </br>
+        <div class="alert alert-success fade in">
+            <a href="#" class="close" data-dismiss="alert">&times;</a>
+            <span id="alert"></span>
+        </div>
 
     </div><!-- /.form-box -->
 </div>

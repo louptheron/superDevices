@@ -10,7 +10,8 @@ var db = require('../../model/db_interface.js');
 module.exports = function(passport) {
     router.get('/', function(req, res) {
         res.render('pages/content', {
-            title: 'Home'
+            title: 'Home',
+            user: (req.user) ? {pseudo: req.user.pseudo} : null
         });
     });
 
@@ -43,15 +44,9 @@ module.exports = function(passport) {
 
     router.get('/login', function (req, res) {
         res.render('pages/login', {
-            title: 'login'
+            title: 'login',
+            user: (req.user) ? {pseudo: req.user.pseudo} : null
         });
-    });
-
-    router.get('/logout', function (req, res) {
-        if (req.isAuthenticated()) {
-            req.logout();
-        }
-        res.redirect('/');
     });
 
     return router;

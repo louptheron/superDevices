@@ -6,6 +6,8 @@ module.exports = function(grunt) {
 
     require('time-grunt')(grunt);
     require('load-grunt-tasks')(grunt);
+    grunt.loadNpmTasks('grunt-mocha-test');
+
 
     grunt.initConfig({
        watch: {
@@ -44,10 +46,10 @@ module.exports = function(grunt) {
             },
             server: {
                 src: ['server/*.js', 'server/*/*.js' , 'server/*/*/*.js']
-            }
-            /*mocha: {
+            },
+            mocha: {
                 src: ['test/model/*.js', 'test/controller/*.js', 'test/config/*.js']
-            }*/
+            }
         },
         jscs: {
             client: {
@@ -55,10 +57,10 @@ module.exports = function(grunt) {
             },
             server: {
                 src: ['server/*.js', 'server/*/*.js','server/*/*/*.js']
-            }
-           /* mocha: {
+            },
+            mocha: {
                 src: ['test/model/*.js', 'test/controller/*.js', 'test/config/*.js']
-            }*/
+            }
         },
         open: {
             express: {
@@ -71,15 +73,15 @@ module.exports = function(grunt) {
                     script: 'server/server_webservice.js'
                 }
             }
-        }
-       /* mochaTest: {
-            dist: {
+        },
+        mochaTest: {
+            test: {
                 src: ['test/*//*.js']
             }
-        }*/
+        }
     });
 
     grunt.registerTask('default', 'serve');
     grunt.registerTask('serve', ['express:dev', 'open:express','watch']);
-    //grunt.registerTask('mocha', ['jscs:mocha', 'jshint:mocha', 'mochaTest:dist']);
+    grunt.registerTask('mocha', 'mochaTest');
 };

@@ -14,15 +14,13 @@ $( "#connectDevice" ).submit(function( event ) {
             deviceName : $('input[name=deviceName]').val(), deviceUID : $('input[name=deviceUID]').val()
         },
         success: function(data) {
-            $(".close").alert();
             if(data.msg.toString() == "ok"){
                 $("#alert").text("Device connected !");
-                $(".alert").show();
             }
             else {
                 $("#alert").text(data.msg.toString());
-                $(".alert").show();
             }
+            $(".alert").show();
         }
     });
     event.preventDefault();
@@ -53,6 +51,10 @@ $('.delete').each(function(index) {
                 success: function (data) {
                     if(data.msg.toString() == "ok"){
                         location.reload();
+                    }
+                    else {
+                        $("#alert").text(data.msg.toString());
+                        $(".alert").show();
                     }
                 }
             });
