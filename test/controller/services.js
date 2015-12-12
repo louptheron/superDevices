@@ -198,6 +198,7 @@ describe('Routing client services', function() {
             mp.preparers.chainPreparers([
                 mp.preparers.rUserDB,
                 mp.preparers.aUser,
+                mp.preparers.rDeviceDB,
                 function() {
                     agent.post('/login').send({
                         email: cp.user.email,
@@ -273,6 +274,7 @@ describe('Routing client services', function() {
             mp.preparers.chainPreparers([
                 mp.preparers.rUserDB,
                 mp.preparers.aUser,
+                mp.preparers.rDeviceDB,
                 function() {
                     agent.post('/login').send({
                         email: cp.user.email,
@@ -361,6 +363,7 @@ describe('Routing client services', function() {
             mp.preparers.chainPreparers([
                 mp.preparers.rUserDB,
                 mp.preparers.aUser,
+                mp.preparers.rDeviceDB,
                 function() {
                     agent.post('/login').send({
                         email: cp.user.email,

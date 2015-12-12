@@ -12,8 +12,7 @@ var config = {
     },
     device: {
         deviceName: 'myDeviceName',
-        deviceUID: '0123456789',
-        _id: "566bfa09e4a14c613d218f42"
+        deviceUID: '0123456789'
     },
     group: {
         groupName: 'myGroupName'
