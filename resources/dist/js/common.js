@@ -34,7 +34,7 @@ $( "#login" ).submit(function( event ) {
             password : $('input[name=password]').val()
         },
         success: function(data) {
-                location.reload();
+            window.location = "/";
         },
         error: function(data) {
                 $("#alert").text("Wrong email/password...");
