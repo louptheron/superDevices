@@ -8,50 +8,64 @@ var db = require('../../model/db_interface.js');
 module.exports = function(passport) {
 
     router.post('/changeState', passport.ensureAuthenticated, function(req, res) {
-        var splitedPost = req.body.id.split("+");
-        if (splitedPost[1] == "true") {
-            db.desactivateDevice(splitedPost[0], function (err) {
-                if(err){
-                    res.send({msg: "ko"});
-                    console.log(err);
-                }
-                else {
-                    res.send({msg: "ok"});
-                }
-            });
+        if(req.body.state && req.body.id){
+            if (req.body.state == "true") {
+                db.desactivateDevice(req.body.id, function (err) {
+                    if(err){
+                        res.send({msg: "ko"});
+                        console.log(err);
+                    }
+                    else {
+                        res.send({msg: "ok"});
+                    }
+                });
+            }
+            else if (req.body.state == "false") {
+                db.activateDevice(req.body.id, function (err) {
+                    if(err){
+                        res.send({msg: "ko"});
+                        console.log(err);
+                    }
+                    else {
+                        res.send({msg: "ok"});
+                    }
+                });
+            }
+            else {
+                res.send({msg: "ko"});
+            }
         }
-        else if (splitedPost[1] == "false") {
-            db.activateDevice(splitedPost[0], function (err) {
+        else {
+            res.send({msg: "ko"});
+        }
+
+    });
+
+    router.post('/delete', passport.ensureAuthenticated, function(req, res) {
+        if(req.body.id){
+            db.removeDevice (req.body.id, req.user._id, function (err) {
                 if(err){
-                    res.send({msg: "ko"});
                     console.log(err);
+                    res.send({msg : "ko"});
                 }
                 else {
-                    res.send({msg: "ok"});
+                    res.send({msg : "ok"});
+
                 }
             });
         }
         else {
-            console.log("error in server in post /changeDeviceState");
-            res.send({msg: "ko"});
+            res.send({msg : "ko"});
         }
     });
 
-    router.post('/delete', passport.ensureAuthenticated, function(req, res) {
-        db.removeDevice (req.body.id, req.user._id, function (err) {
-            if(err){
-                console.log(err);
-                res.send({msg : "ko"});
-            }
-        });
-        res.send({msg : "ok"});
-    });
-
     router.post('/connect', passport.ensureAuthenticated, function(req, res) {
-        console.log(req);
         db.addDevice(req.body.deviceName, req.body.deviceUID, req.user._id, function(err) {
             if (err) {
-                if (err.toString().indexOf('deviceName') >= 0) {
+                if (err.toString().indexOf('duplicate key') >= 0) {
+                    res.send({msg: 'device UID already exist'});
+                }
+                else if (err.toString().indexOf('deviceName') >= 0) {
                     res.send({msg: 'device name needed'});
                 } else if (err.toString().indexOf('deviceUID') >= 0) {
                     res.send({msg: 'UID needed'});

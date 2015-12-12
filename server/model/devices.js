@@ -10,7 +10,7 @@ var UserDB = db.user();
 
 var devices = {
 
-    createDevice: function(Name, UID,userID, done) {
+    createDevice: function(Name, UID, userID, done) {
         if (!userID) {
             done('Error: `userID` is required.');
         } else {
