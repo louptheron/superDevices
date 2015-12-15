@@ -6,6 +6,7 @@
 
 var db = require('../../server/model/db_interface.js');
 var dbSchema = require('../../server/model/db_schemas.js');
+var mdp = require('./model_data_preparer.js');
 
 var mp = {
     preparers: {
@@ -15,7 +16,7 @@ var mp = {
         },
         rUserDB: function(nextArray) {
             var userDB = dbSchema.user();
-            userDB.remove({}, function() {
+            userDB.remove({ email: mdp.user.email }, function() {
                 var next = nextArray.splice(0, 1)[0];
                 next(nextArray);
             });
@@ -29,7 +30,7 @@ var mp = {
         },*/
         rDeviceDB: function(nextArray) {
             var deviceDB = dbSchema.device();
-            deviceDB.remove({}, function() {
+            deviceDB.remove({ deviceUID: mdp.device.deviceUID }, function() {
                 var next = nextArray.splice(0, 1)[0];
                 next(nextArray);
             });
