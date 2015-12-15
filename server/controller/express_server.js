@@ -16,6 +16,8 @@ var client = require('./common/common_router.js')(passport);
 var clientServices = require('./common/common_service.js')(passport);
 //var device = require('./device/device_router.js')(passport);
 var deviceServices = require('./device/device_service.js')(passport);
+var group = require('./group/group_router.js')(passport);
+var groupServices = require('./group/group_service.js')(passport);
 
 var hbs = exphbs.create({
     defaultLayout: 'client',
@@ -50,5 +52,7 @@ app.use('/', client);
 app.use('/', clientServices);
 //app.use('/device', device);
 app.use('/device', deviceServices);
+app.use('/group', group);
+app.use('/group', groupServices);
 
 module.exports = app;

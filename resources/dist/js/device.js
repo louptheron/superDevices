@@ -2,7 +2,6 @@
  * Created by rouxbot on 09/12/15.
  */
 'use strict';
-/* globals tools, toastr */
 
 $(".alert").hide();
 

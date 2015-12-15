@@ -20,7 +20,7 @@ var devices = {
             });
             device.save(function(err, doc) {
                 if (err) {
-                    done(err, doc);
+                    done(err);
                 } else {
                     UserDB.findByIdAndUpdate({_id: userID}, {$push: {devices: doc._id}}, function(e) {
                         done(e, doc);

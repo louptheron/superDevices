@@ -42,6 +42,16 @@ module.exports = function(passport) {
         });
     });
 
+    router.get('/manageGroups', passport.ensureAuthenticated,function(req, res) {
+        db.getGroups(req.user._id,function(err,docs) {
+            res.render('pages/manageGroups', {
+                title: "Groups",
+                groups: docs.groups,
+                user: (req.user) ? {pseudo: req.user.pseudo} : null
+            });
+        });
+    });
+
     router.get('/login', function (req, res) {
         res.render('pages/login', {
             title: 'login',

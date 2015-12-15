@@ -1,0 +1,126 @@
+
+<div class="content-wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Groups</h3>
+                    </div>
+                    {{#if groups}}
+                        <table class="table table-hover" id="dev-table">
+                            <thead>
+                            <tr>
+                                <th>Groups Name</th>
+                                <th>Show Devices</th>
+                                <th>State of Group</th>
+                                <th>Add Device</th>
+                                <th>Delete</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {{#each groups as |group|}}
+                                <tr>
+                                    <td>{{group.groupName}}</td>
+                                    <td>
+                                        <button type="button" class="btn btn-warning btn-xs active showDevicesGroup" value="{{group._id}}+{{group.groupName}}" data-toggle="tab" href="#showDevicesOfGroup">
+                                            <span class="glyphicon glyphicon-zoom-in" aria-hidden="true"></span> Show Devices
+                                        </button>
+                                    </td>
+                                    <td>
+                                        <input type="checkbox" {{#if group.state}} checked {{/if}} data-size="mini" class="stateGroup" value="{{group._id}}+{{group.state}}" >
+                                    </td>
+                                    <td>
+                                        <button type="button" class="btn btn-success btn-xs addDevicesGroup" value="{{group._id}}+{{group.groupName}}" data-toggle="tab" href="#addDevicestoGroup">
+                                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>Add Device
+                                        </button>
+                                    </td>
+                                    <td>
+                                        <button type="button" class="btn btn-danger btn-xs deleteGroup" value="{{group._id}}">
+                                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> delete
+                                        </button>
+                                    </td>
+                                </tr>
+                            {{/each}}
+                            </tbody>
+                        </table>
+                    {{else}}
+                        You don't have any group
+                    {{/if}}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h3 class="panel-title" id="titleGroup"></h3>
+                    </div>
+                    <div class="tab-content">
+                        <div id="showDevicesOfGroup" class="tab-pane fade in active">
+                            <table class="table table-hover" id="dev-table">
+                                <thead>
+                                <tr>
+                                    <th>Device Name</th>
+                                    <th>Remove</th>
+                                </tr>
+                                </thead>
+                                <tbody id="tDevices">
+
+                                </tbody>
+                            </table>
+                        </div>
+                        <div id="addDevicestoGroup" class="tab-pane fade">
+                            <table class="table table-hover" id="dev-table">
+                                <thead>
+                                <tr>
+                                    <th>Device Name</th>
+                                    <th>Add</th>
+                                </tr>
+                                </thead>
+                                <tbody id="tabDevices">
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Create group</h3>
+                    </div>
+                    <div class="register-box-body">
+                        <p class="login-box-msg">Create a new group</p>
+                        <form id="connectGroup">
+                            <div class="form-group has-feedback">
+                                <input type="text" class="form-control" name="groupName" placeholder="Group name">
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-8"></div><!-- /.col -->
+                                <div class="col-xs-2"></div>
+                                <div class="col-xs-2">
+                                    <button type="submit" class="btn btn-primary btn-block btn-sm btn-flat">connect</button>
+                                </div><!-- /.col -->
+                            </div>
+                        </form>
+                        </br>
+                        <div class="alert alert-success fade in">
+                            <a href="#" class="close" data-dismiss="alert">&times;</a>
+                            <span id="alert"></span>
+                        </div>
+                    </div><!-- /.form-box -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

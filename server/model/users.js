@@ -47,6 +47,11 @@ var users = {
         UserDB.findById(id).populate('devices').exec(function(err, docs) {
             done(err,docs);
         });
+    },
+    getFullGroupsByUserID: function(id, done) {
+        UserDB.findById(id).populate('groups').exec(function(err, docs) {
+            done(err,docs);
+        });
     }
 };
 
