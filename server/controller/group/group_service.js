@@ -23,7 +23,33 @@ module.exports = function(passport) {
         });
     });
 
-    router.post('/changeState', passport.ensureAuthenticated, function(req, res) {
+    router.post('/desactivate', passport.ensureAuthenticated, function(req, res) {
+        db.desactivateGroup(req.body.id, function(err, doc){
+            if(err){
+                res.send({msg: "ko"});
+                console.log(err);
+            }
+            else {
+                res.send({msg: "ok"});
+            }
+        })
+    });
+
+    router.post('/activate', passport.ensureAuthenticated, function(req, res) {
+        db.activateGroup(req.body.id, function(err, doc){
+            if(err){
+                res.send({msg: "ko"});
+                console.log(err);
+            }
+            else {
+                console.log(doc);
+                res.send({msg: "ok"});
+            }
+        })
+    });
+
+
+        router.post('/changeState', passport.ensureAuthenticated, function(req, res) {
         if(req.body.state && req.body.id){
             if (req.body.state == "true") {
                 db.desactivateGroup(req.body.id, function (err) {
@@ -75,7 +101,8 @@ module.exports = function(passport) {
     });
 
    router.post('/add', passport.ensureAuthenticated,function(req, res) {
-        db.getDevicesForChoose(req.user._id ,req.body.id, function(err,docs) {
+        db.getAvailableDevices(req.user._id , req.body.id, function(err,docs) {
+            console.log("///" + docs + "///");
             res.send({
                 devices: docs.devices,
                 groupName: req.body.name

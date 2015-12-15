@@ -2,6 +2,7 @@
 'use strict';
 
 $(".alert").hide();
+$(".manipulateDevice").hide();
 
 $( "#connectGroup" ).submit(function( event ) {
     $.ajax({
@@ -47,6 +48,50 @@ $( ".stateGroup").each(function(index) {
         });
 });
 
+$( ".activateGroup" ).each(function(index) {
+    $(this)
+        .on( "click", function() {
+            $.ajax({
+                url: '/group/activate',
+                type: 'post',
+                data: {
+                    id : $(this).attr("value")
+                },
+                success: function(data) {
+                    if (data.msg.toString() == "ok") {
+                        $("#alertModifyGroup").html("Group activated !");
+                        $(".alertModifyGroup").show();
+                    }
+                    else {
+                        console.log(data.msg.toString());
+                    }
+                }
+            });
+        });
+});
+
+$( ".desactivateGroup" ).each(function(index) {
+    $(this)
+        .on( "click", function() {
+                $.ajax({
+                    url: '/group/desactivate',
+                    type: 'post',
+                    data: {
+                        id : $(this).attr("value")
+                    },
+                    success: function(data) {
+                        if (data.msg.toString() == "ok") {
+                            $("#alertModifyGroup").html("Group desactivated !");
+                            $(".alertModifyGroup").show();
+                        }
+                        else {
+                            console.log(data.msg.toString());
+                        }
+                    }
+                });
+        });
+});
+
 $('.deleteGroup').each(function(index) {
     $(this)
         .click(function () {
@@ -66,9 +111,11 @@ $('.deleteGroup').each(function(index) {
             });
         });
 });
+
 $('.showDevicesGroup').each(function(index) {
     $(this)
         .click(function () {
+            $(".manipulateDevice").show();
             var splitedValues = $(this).attr("value").split("+");
             $.ajax({
                 url: '/group/show',
@@ -88,6 +135,7 @@ $('.showDevicesGroup').each(function(index) {
 $('.addDevicesGroup').each(function(index) {
     $(this)
         .click(function () {
+            $(".manipulateDevice").show();
             var splitedValues = $(this).attr("value").split("+");
             $.ajax({
                 url: '/group/add',
@@ -97,10 +145,10 @@ $('.addDevicesGroup').each(function(index) {
                     name : splitedValues[1]
                 },
                 success: function (data) {
+                    console.log(data);
                     $('#tabDevices').empty();
-                    $('#titleGroup').text("choose a Device for -"+data.groupName+"- Group");
+                    $('#titleGroup').text("choose a Device to add to the group : "+data.groupName);
                     $.each(data.devices,function(i,val){
-
                         $('#tabDevices').append("<tr><td>"+val.deviceName+"</td><td><button class='btn btn-success btn-xs chooseDev' value='"+val._id+"+"+splitedValues[0]+"'><span class='glyphicon glyphicon-plus' aria-hidden='true'></span>Add Device</button></td></tr>");
                     });
                 }
@@ -118,10 +166,10 @@ $('#tabDevices').on('click', '.chooseDev', function(){
             idDevice : splitedValues[0]},
         success: function(data) {
             if(data.msg.toString() == "ok"){
-                alert("ok");
+                location.reload();
             }
             else {
-                alert(data.msg.toString());
+                console.log(data.msg.toString());
             }
         }
     });
@@ -136,10 +184,10 @@ $('#tDevices').on('click', '.removeDev', function(){
             idDevice : splitedValues[0]},
         success: function(data) {
             if(data.msg.toString() == "ok"){
-                alert("ok");
+                location.reload();
             }
             else {
-                alert(data.msg.toString());
+                console.log(data.msg.toString());
             }
         }
     });

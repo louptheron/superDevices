@@ -32,7 +32,7 @@ var deviceSchema = Schema({
 var groupSchema = Schema({
     groupName: {type: String, required: true},
     devices: [{type: Schema.Types.ObjectId, ref: 'Devices'}],
-    state: {type:Boolean,default:false},
+    state: {type:Boolean,default:false}
 });
 
 module.exports = {

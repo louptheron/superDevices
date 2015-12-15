@@ -13,7 +13,8 @@
                             <tr>
                                 <th>Groups Name</th>
                                 <th>Show Devices</th>
-                                <th>State of Group</th>
+                                <th>Activate Group</th>
+                                <th>Desactivate Group</th>
                                 <th>Add Device</th>
                                 <th>Delete</th>
                             </tr>
@@ -23,12 +24,15 @@
                                 <tr>
                                     <td>{{group.groupName}}</td>
                                     <td>
-                                        <button type="button" class="btn btn-warning btn-xs active showDevicesGroup" value="{{group._id}}+{{group.groupName}}" data-toggle="tab" href="#showDevicesOfGroup">
+                                        <button type="button" class="btn btn-warning btn-xs showDevicesGroup" value="{{group._id}}" data-toggle="tab" href="#showDevicesOfGroup">
                                             <span class="glyphicon glyphicon-zoom-in" aria-hidden="true"></span> Show Devices
                                         </button>
                                     </td>
                                     <td>
-                                        <input type="checkbox" {{#if group.state}} checked {{/if}} data-size="mini" class="stateGroup" value="{{group._id}}+{{group.state}}" >
+                                        <button type="button" class="btn btn-info btn-xs activateGroup" value="{{group._id}}"><span class="glyphicon glyphicon-ok-circle"></span> Activate</button>
+                                    </td>
+                                    <td>
+                                        <button type="button" class="btn btn-danger btn-xs desactivateGroup" value="{{group._id}}"><span class="glyphicon glyphicon-remove-circle"></span> Desactivate</button>
                                     </td>
                                     <td>
                                         <button type="button" class="btn btn-success btn-xs addDevicesGroup" value="{{group._id}}+{{group.groupName}}" data-toggle="tab" href="#addDevicestoGroup">
@@ -47,12 +51,16 @@
                     {{else}}
                         You don't have any group
                     {{/if}}
+                    <div class="alert alert-success fade in alertModifyGroup">
+                        <a href="#" class="close" data-dismiss="alert">&times;</a>
+                        <span id="alertModifyGroup"></span>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="container">
+    <div class="container manipulateDevice">
         <div class="row">
             <div class="col-md-10">
                 <div class="panel panel-primary">

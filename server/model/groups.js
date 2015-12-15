@@ -56,61 +56,75 @@ var groups = {
         });
     },
 
-    getDevicesForChoose: function(userId,groupId, done) {
+    getAvailableDevices: function(userId, groupId, done) {
         GroupDB.findById(groupId).populate('devices').exec(function(err, docs) {
             if(err){
-                done(err);
-            }
-            else if(!docs){
-                done(docs);
+                console.log(err);
             }
             else {
-
-                UserDB.findById(userId).populate({
+                var ids = [];
+                for (var device in docs.devices){
+                    if(docs.devices.hasOwnProperty(device)){
+                        ids.push(docs.devices[device]._id);
+                    }
+                }
+                UserDB.findOne({_id: userId}).populate({
                     path: 'devices',
-                    matcht: {_id: {$ne: docs.devices._id}},
-                    select: ('deviceName _id')
+                    match: {"_id" : {$nin:ids} }
                 }).exec(function (errs, docu) {
-                    if (errs)
-                        done(errs);
-                    else if (!docu)
-                        done(errs);
-                    else
+                    if (errs){
+                        console.log(errs);
+                    }
+                    else{
                         done(errs, docu);
+                    }
                 });
             }
         });
     },
-    activateGroup: function(id, done) {
-        GroupDB.findByIdAndUpdate({_id: id}, {state: true}, function(err) {
+
+    activateGroup: function(groupId, done) {
+        GroupDB.findById(groupId).populate('devices').exec(function(err, docs) {
             if(err){
-                done(err);
-            }/*else{
-                GroupDB.getFullDevicesByGroupID({_id: id}, function(err,docs){
-                    for (var item in docs.devices){
-                        DeviceDB.activateDevice(docs.devices[item]._id,function(err){
-                            done(err);
-                        });
+                console.log(err);
+            }
+            else {
+                var ids = [];
+                for (var device in docs.devices){
+                    if(docs.devices.hasOwnProperty(device)){
+                        if(docs.devices[device]._id){
+                            ids.push(docs.devices[device]._id);
+                        }
                     }
+                }
+                DeviceDB.update({_id: {$in: ids}}, {state: true}, {multi: true}, function(err) {
+                    done(err);
                 });
-            }*/
+            }
         });
     },
-    desactivateGroup: function(id, done) {
-        GroupDB.findByIdAndUpdate({_id: id}, {state: false}, function(err) {
+
+    desactivateGroup: function(groupId, done) {
+        GroupDB.findById(groupId).populate('devices').exec(function(err, docs) {
             if(err){
-                done(err);
-            }/*else{
-                GroupDB.getFullDevicesByGroupID(id, function(err,docs){
-                    for (var item in docs.devices){
-                        DeviceDB.desactivateDevice(docs.devices[item]._id,function(err){
-                            done(err);
-                        });
+                console.log(err);
+            }
+            else {
+                var ids = [];
+                for (var device in docs.devices){
+                    if(docs.devices.hasOwnProperty(device)){
+                        if(docs.devices[device]._id){
+                            ids.push(docs.devices[device]._id);
+                        }
                     }
+                }
+                DeviceDB.update({_id: {$in: ids}}, {state: false}, {multi: true}, function(err) {
+                    done(err);
                 });
-            }*/
+            }
         });
     },
+
     addDeviceToGroup: function(deviceID, groupID, done) {
         GroupDB.findByIdAndUpdate(groupID, {$addToSet: {devices: deviceID}}, function(errGroup) {
             if (errGroup) {

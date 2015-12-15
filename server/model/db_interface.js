@@ -30,7 +30,7 @@ var db = {
     addDeviceToGroup: dbGroups.addDeviceToGroup,
     removeDeviceToGroup: dbGroups.removeDeviceToGroup,
     getDevicesToGroup: dbGroups.getFullDevicesByGroupID,
-    getDevicesForChoose: dbGroups.getDevicesForChoose
+    getAvailableDevices: dbGroups.getAvailableDevices
 };
 
 module.exports = db;

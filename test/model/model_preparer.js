@@ -42,7 +42,7 @@ var mp = {
             });
         },
         aDevice: function(nextArray) {
-            db.addDevice(mp.device.deviceName, mp.device.deviceUID, function() {
+            db.addDevice(mp.device.deviceName, mp.device.deviceUID, function(err, doc) {
                 var next = nextArray.splice(0, 1)[0];
                 next(nextArray);
             });
