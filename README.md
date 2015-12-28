@@ -8,7 +8,7 @@ Framework : Express.
 # Install
 ```javascript
 npm install
-grunt install ?
+grunt init
 ```
 # Start
 `grunt`

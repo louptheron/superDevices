@@ -25,6 +25,7 @@ var db = {
     addGroup: dbGroups.createGroup,
     removeGroup: dbGroups.removeGroup,
     getGroup: dbGroups.getGroup,
+    getGroupFromName: dbGroups.getGroupFromName,
     activateGroup: dbGroups.activateGroup,
     desactivateGroup: dbGroups.desactivateGroup,
     addDeviceToGroup: dbGroups.addDeviceToGroup,

@@ -10,7 +10,7 @@ var DeviceDB = db.device();
 
 var groups = {
 
-    createGroup: function(Name,userID, done) {
+    createGroup: function(Name, userID, done) {
         if (!userID) {
             done('Error: `userID` is required.');
         } else {
@@ -46,6 +46,12 @@ var groups = {
 
     getGroup: function(groupID, done) {
         GroupDB.findById(groupID,function(err, doc) {
+            done(err, doc);
+        });
+    },
+
+    getGroupFromName: function(groupName, done) {
+        GroupDB.findOne({groupName: groupName},function(err, doc) {
             done(err, doc);
         });
     },
@@ -136,6 +142,7 @@ var groups = {
             }
         });
     },
+
     removeDeviceToGroup: function(deviceID, groupID, done) {
         GroupDB.findByIdAndUpdate(groupID, {$pull: {devices: deviceID}}, function(errGroup) {
             if (errGroup) {
@@ -149,4 +156,4 @@ var groups = {
     }
 };
 
-module.exports =groups;
+module.exports = groups;

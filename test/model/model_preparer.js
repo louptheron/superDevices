@@ -21,13 +21,13 @@ var mp = {
                 next(nextArray);
             });
         },
-        /*rGroupDB: function(nextArray) {
+        rGroupDB: function(nextArray) {
             var groupDB = dbSchema.group();
-            groupDB.remove({}, function() {
+            groupDB.remove({ groupName: mdp.group.groupName }, function() {
                 var next = nextArray.splice(0, 1)[0];
                 next(nextArray);
             });
-        },*/
+        },
         rDeviceDB: function(nextArray) {
             var deviceDB = dbSchema.device();
             deviceDB.remove({ deviceUID: mdp.device.deviceUID }, function() {
@@ -40,22 +40,7 @@ var mp = {
                 var next = nextArray.splice(0, 1)[0];
                 next(nextArray);
             });
-        },
-        aDevice: function(nextArray) {
-            db.addDevice(mp.device.deviceName, mp.device.deviceUID, function(err, doc) {
-                var next = nextArray.splice(0, 1)[0];
-                next(nextArray);
-            });
         }
-        /*aTeam1: function(nextArray) {
-            db.getUser(mp.user.email, function(err, doc) {
-                db.createTeam(mp.team1.name, mp.team1.tag, doc._id, function() {
-                    var next = nextArray.splice(0, 1)[0];
-                    next(nextArray);
-                });
-            });
-        },*/
-
     }
 };
 

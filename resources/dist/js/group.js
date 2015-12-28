@@ -25,29 +25,6 @@ $( "#connectGroup" ).submit(function( event ) {
     event.preventDefault();
 });
 
-$( ".stateGroup").each(function(index) {
-    $(this)
-        .bootstrapSwitch()
-        .on( "switchChange.bootstrapSwitch", function() {
-            var splitedValues = $(this).attr("value").split("+");
-            if(splitedValues[1] === "true" || splitedValues[1] === "false"){
-                $.ajax({
-                    url: '/group/changeState',
-                    type: 'post',
-                    data: {
-                        id : splitedValues[0],
-                        state : splitedValues[1]},
-                    success: function(data) {
-                        console.log(data);
-                    }
-                });
-            }
-            else {
-                console.log("wrong parameters")
-            }
-        });
-});
-
 $( ".activateGroup" ).each(function(index) {
     $(this)
         .on( "click", function() {
@@ -174,6 +151,7 @@ $('#tabDevices').on('click', '.chooseDev', function(){
         }
     });
 });
+
 $('#tDevices').on('click', '.removeDev', function(){
     var splitedValues = $(this).attr("value").split("+");
     $.ajax({
