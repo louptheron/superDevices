@@ -101,7 +101,7 @@ $('.showDevicesGroup').each(function(index) {
                     name : splitedValues[1]},
                 success: function (data) {
                     $('#tDevices').empty();
-                    $('#titleGroup').text("Remove a Device for -"+data.groupName+"- Group");
+                    $('#titleGroup').text("Remove a device");
                     $.each(data.devices,function(i,val){
                         $('#tDevices').append("<tr><td>"+val.deviceName+"</td><td><button class='btn btn-danger btn-xs removeDev' value='"+val._id+"+"+splitedValues[0]+"'><span class='glyphicon glyphicon-remove' aria-hidden='true'></span>Remove Device</button></td></tr>");
                     });
@@ -109,6 +109,7 @@ $('.showDevicesGroup').each(function(index) {
             });
         });
 });
+
 $('.addDevicesGroup').each(function(index) {
     $(this)
         .click(function () {
