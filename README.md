@@ -1,5 +1,5 @@
 # superDevices
-Website for managing devices (Internet of Things).
+Web App which allow users to manage devices & group of devices by enabling & disabling theses.
 
 * Language : Javascript
 * Engine : NodeJS.
@@ -7,9 +7,8 @@ Website for managing devices (Internet of Things).
 * Framework : Express.
 
 # Install
-```javascript
-npm install
-```
+`npm install`
+
 # Start
 `npm start`
 
