@@ -1,17 +1,17 @@
 # superDevices
 Website for managing devices (Internet of Things).
 
-* Language : NodeJs.
-* Db : MongoDb.
+* Language : Javascript
+* Engine : NodeJS.
+* DB : MongoDB (with mongoose ODM).
 * Framework : Express.
 
 # Install
 ```javascript
 npm install
-grunt init
 ```
 # Start
-`grunt`
+`npm start`
 
 # Test
-`grunt mocha`
+`npm test`

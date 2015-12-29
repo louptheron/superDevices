@@ -1,5 +1,5 @@
 {
-  "name": "webservice_project",
+  "name": "superDevices",
   "version": "1.0.0",
   "description": "Webservices for IoT, in NodeJS",
   "main": "server/server_webservices.js",
@@ -7,7 +7,6 @@
     "test": "test"
   },
   "dependencies": {
-    "bower": "^1.6.5",
     "connect-mongo": "^0.8.2",
     "express": "^4.13.3",
     "express-handlebars": "^2.0.1",
@@ -20,8 +19,6 @@
     "grunt-express": "^1.4.1",
     "grunt-express-server": "^0.5.1",
     "grunt-init": "^0.3.2",
-    "grunt-jscs": "^2.3.0",
-    "grunt-mocha-test": "^0.12.7",
     "grunt-open": "^0.2.3",
     "jscs": "^2.6.0",
     "jshint-stylish": "^2.1.0",
@@ -46,7 +43,7 @@
     "validator": "^4.3.0"
   },
   "scripts": {
-    "start": "node server/server_webservices.js",
+    "start": "grunt launch",
     "test": "mocha --recursive"
   },
   "author": "",

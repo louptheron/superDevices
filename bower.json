@@ -1,9 +1,9 @@
 {
-  "name": "webservice_project",
-  "description": "Webservices for IoT, in NodeJS",
-  "main": "server/server_webservice.js",
+  "name": "superDevices",
+  "description": "Manage Webservices for IoT, in NodeJS",
+  "main": "server/server_webservices.js",
   "authors": [
-    "clemRoux <roux.clement05@gmail.com>"
+    "clemRoux & louptheron"
   ],
   "license": "ISC",
   "moduleType": [],

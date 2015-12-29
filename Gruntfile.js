@@ -65,7 +65,7 @@ module.exports = function(grunt) {
     express: {
       dev: {
         options: {
-          script: 'server/server_webservice.js'
+          script: 'server/server_webservices.js'
         }
       }
     },
@@ -76,7 +76,7 @@ module.exports = function(grunt) {
     }
   });
 
-  grunt.registerTask('default', 'serve');
-  grunt.registerTask('serve', ['express:dev', 'open:express', 'watch']);
+  grunt.registerTask('default', 'launch');
+  grunt.registerTask('launch', ['express:dev', 'open:express', 'watch']);
   grunt.registerTask('mocha', 'mochaTest');
 };
