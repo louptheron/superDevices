@@ -2,7 +2,7 @@
   "name": "webservice_project",
   "version": "1.0.0",
   "description": "Webservices for IoT, in NodeJS",
-  "main": "server/server_webservice.js",
+  "main": "server/server_webservices.js",
   "directories": {
     "test": "test"
   },
@@ -46,7 +46,8 @@
     "validator": "^4.3.0"
   },
   "scripts": {
-    "test": "mocha"
+    "start": "node server/server_webservices.js",
+    "test": "mocha --recursive"
   },
   "author": "",
   "license": "ISC"
