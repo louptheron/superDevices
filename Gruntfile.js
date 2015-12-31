@@ -46,17 +46,6 @@ module.exports = function(grunt) {
         src: ['test/model/*.js', 'test/controller/*.js', 'test/config/*.js']
       }
     },
-    jscs: {
-      client: {
-        src: ['resources/scripts/*.js']
-      },
-      server: {
-        src: ['server/*.js', 'server/*/*.js', 'server/*/*/*.js']
-      },
-      mocha: {
-        src: ['test/model/*.js', 'test/controller/*.js', 'test/config/*.js']
-      }
-    },
     open: {
       express: {
         path: 'http://localhost:3000'
